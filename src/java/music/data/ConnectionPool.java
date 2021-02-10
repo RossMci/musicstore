@@ -7,7 +7,6 @@ import javax.naming.*;
 public class ConnectionPool {
 
     private static ConnectionPool pool = null;
-    private static ConnectionPool pool2 = null;
     private static DataSource dataSource = null;
 //        private static DataSource dataSource2 = null;
 //    public ConnectionPool connection1;

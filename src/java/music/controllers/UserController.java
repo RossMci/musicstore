@@ -45,7 +45,7 @@ public class UserController extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                cookie.setPath("/");
+                cookie.setPath("/musicStore");
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
