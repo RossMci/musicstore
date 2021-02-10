@@ -4,12 +4,10 @@ import java.sql.*;
 import javax.sql.DataSource;
 import javax.naming.*;
 
-public class ConnectionPool {
+public class ConnectionPool1 {
 
-    private static ConnectionPool pool = null;
-    private static ConnectionPool pool2 = null;
+    private static ConnectionPool1 pool = null;
     private static DataSource dataSource = null;
-//        private static DataSource dataSource2 = null;
 //    public ConnectionPool connection1;
 //    public ConnectionPool connection2;
 //    DataSource dataSource1;
@@ -57,19 +55,19 @@ public class ConnectionPool {
 //    return connection2;
 //}
 
-    public synchronized static ConnectionPool getInstance() {
+    public synchronized static ConnectionPool1 getInstance() {
         if (pool == null) {
-            pool = new ConnectionPool();
+            pool = new ConnectionPool1();
         }
 
         return pool;
     }
 
-    private ConnectionPool() {
+    private ConnectionPool1() {
         try {
             InitialContext ic = new InitialContext();
-//            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/testDB");
-            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/testStore");
+            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/testDB");
+//            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/testStore");
         } catch (NamingException e) {
             System.err.println(e);
         }

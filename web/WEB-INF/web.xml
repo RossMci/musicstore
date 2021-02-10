@@ -73,7 +73,7 @@
         </web-resource-collection>
         <!-- Authorize the service and programmer roles -->
         <auth-constraint>
-            <role-name>service</role-name>
+<!--            <role-name>service</role-name>-->
             <role-name>programmer</role-name>
         </auth-constraint>
         <!-- Forces a secure connection - remove comments to enable -->

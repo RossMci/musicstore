@@ -1,6 +1,7 @@
 package music.controllers;
 
 import java.io.IOException;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -42,12 +43,15 @@ public class UserController extends HttpServlet {
     private String deleteCookies(HttpServletRequest request,
             HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            cookie.setMaxAge(0);  //delete the cookie
-            cookie.setPath("/");  //entire application
-            response.addCookie(cookie);
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                cookie.setPath("/");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+            
         }
-        return "/delete_cookies.jsp";
+         return "/delete_cookies.jsp";
     }
 
     private String subscribeToEmail(HttpServletRequest request,
