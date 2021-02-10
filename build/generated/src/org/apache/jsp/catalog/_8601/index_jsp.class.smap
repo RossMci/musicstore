@@ -1,0 +1,14 @@
+SMAP
+index_jsp.java
+JSP
+*S JSP
+*F
++ 0 index.jsp
+catalog/8601/index.jsp
+*L
+1,2:44,2
+3,4:48
+7:52,3
+8,13:55
+20,2:67,2
+*E
