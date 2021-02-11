@@ -12,6 +12,14 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>music.controllers.AdminController</servlet-class>
     </servlet>
+        <servlet>
+        <servlet-name>CheckPasswordServlet</servlet-name>
+        <servlet-class>acount.CheckPasswordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckPasswordServlet</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>CatalogController</servlet-name>
         <servlet-class>music.controllers.CatalogController</servlet-class>
@@ -108,6 +116,6 @@
     <!-- Use cookies (not URL encoding) for session tracking -->
     <session-config>
         <tracking-mode>COOKIE</tracking-mode>
-         <session-timeout>30</session-timeout>
+<!--         <session-timeout>30</session-timeout>-->
     </session-config>
 </web-app>

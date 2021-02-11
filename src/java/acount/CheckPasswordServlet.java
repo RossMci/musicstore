@@ -10,9 +10,7 @@ import util.PasswordUtil;
 public class CheckPasswordServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         // get parameters from the request
         String username = request.getParameter("username");
