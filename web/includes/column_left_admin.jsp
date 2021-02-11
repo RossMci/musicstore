@@ -4,6 +4,7 @@
       <ul>
           <li><a href="<c:url value='/' />">Home</a></li>
           <li><a href="<c:url value='/admin' />">Admin Menu</a></li>
+          <li><a href="<c:url value='/admin/RegisterAdmin' />">Admin Register</a></li>
       </ul>
     </nav>
 </aside>
