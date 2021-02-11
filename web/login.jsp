@@ -7,7 +7,9 @@
 
 <h1>Login Form</h1>
 <p>Please enter a username and password to continue.</p>
-<form action="j_security_check" method="get">
+
+
+<form action="user/mylogin" method="get">
     <label>Username</label>
     <input type="text" name="j_username"><br>
     <label>Password</label>

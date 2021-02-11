@@ -61,20 +61,20 @@ public class AdminController extends HttpServlet {
 
         List<Invoice> unprocessedInvoices
                 = InvoiceDB.selectUnprocessedInvoices();
-        
+
         String url;
         if (unprocessedInvoices != null) {
             if (unprocessedInvoices.size() <= 0) {
                 unprocessedInvoices = null;
             }
         }
-        
+
         HttpSession session = request.getSession();
         session.setAttribute("unprocessedInvoices", unprocessedInvoices);
         url = "/admin/invoices.jsp";
         return url;
     }
-    
+
     private String displayInvoice(HttpServletRequest request,
             HttpServletResponse response) {
 
@@ -82,8 +82,7 @@ public class AdminController extends HttpServlet {
 
         String invoiceNumberString = request.getParameter("invoiceNumber");
         int invoiceNumber = Integer.parseInt(invoiceNumberString);
-        List<Invoice> unprocessedInvoices = (List<Invoice>) 
-                session.getAttribute("unprocessedInvoices");
+        List<Invoice> unprocessedInvoices = (List<Invoice>) session.getAttribute("unprocessedInvoices");
 
         Invoice invoice = null;
         for (Invoice unprocessedInvoice : unprocessedInvoices) {
@@ -107,14 +106,14 @@ public class AdminController extends HttpServlet {
 
         return "/adminController/displayInvoices";
     }
-    
+
     private void displayReport(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
         String reportName = request.getParameter("reportName");
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
-        
+
         Workbook workbook;
         if (reportName.equalsIgnoreCase("userEmail")) {
             workbook = ReportDB.getUserEmail();
@@ -123,8 +122,8 @@ public class AdminController extends HttpServlet {
         } else {
             workbook = new HSSFWorkbook();
         }
-        
-        response.setHeader("content-disposition", 
+
+        response.setHeader("content-disposition",
                 "attachment; filename=" + reportName + ".xls");
         try (OutputStream out = response.getOutputStream()) {
             workbook.write(out);

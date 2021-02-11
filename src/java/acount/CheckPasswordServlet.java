@@ -27,9 +27,10 @@ public class CheckPasswordServlet extends HttpServlet {
         request.setAttribute("message", message);        
         
         // hash and salt password
-        String hashedPassword;
         String salt = "";
         String saltedAndHashedPassword;
+
+        String hashedPassword;
         try {
             hashedPassword = PasswordUtil.hashPassword(password);
             salt = PasswordUtil.getSalt();

@@ -4,6 +4,7 @@
 <!-- start the middle column -->
 
 <%@ page isErrorPage="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section>
 
@@ -13,6 +14,17 @@
 
     <h2>Details</h2>
     <p>Requested URI: ${pageContext.errorData.requestURI}</p>
+    <p>Requested URI: ${pageContext.errorData.servletName}</p>
+    <p>Requested URI: ${pageContext.errorData.statusCode}</p>
+    <p>Requested URI: ${pageContext.errorData.throwable.message}</p>
+        <h2>Details</h2>
+    <code>
+    ${pageContext.errorData.servletName} threw a <br>
+    ${pageContext.exception}<br>
+    <c:forEach var="line" items="${pageContext.errorData.throwable.stackTrace}">
+        &nbsp;&nbsp;&nbsp;&nbsp;at ${line}<br>
+    </c:forEach>
+    </code>
 
 </section>
 
