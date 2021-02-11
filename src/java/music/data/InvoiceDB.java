@@ -22,7 +22,7 @@ public class InvoiceDB {
             ps.setLong(1, invoice.getUser().getId());
             ps.setDouble(2, invoice.getInvoiceTotal());
             ps.executeUpdate();
-
+           
             //Get the InvoiceID from the last INSERT statement.
             String identityQuery = "SELECT @@IDENTITY AS IDENTITY";
             Statement identityStatement = connection.createStatement();

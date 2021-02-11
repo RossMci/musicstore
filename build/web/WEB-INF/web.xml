@@ -52,6 +52,10 @@
         <error-code>404</error-code>
         <location>/error_404.jsp</location>
     </error-page>
+<!--       <error-page>
+        <error-code>403</error-code>
+        <location>/login_error.jsp</location>
+    </error-page>-->
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error_java.jsp</location>
@@ -65,6 +69,10 @@
         <description>programmers</description>
         <role-name>programmer</role-name>
     </security-role>
+    <security-role>
+        <description>Administrators</description>
+        <role-name>Administrator</role-name>
+    </security-role>
     <security-constraint>
         <!-- Restrict access to the URLs in the admin directory -->
         <web-resource-collection>
@@ -73,8 +81,9 @@
         </web-resource-collection>
         <!-- Authorize the service and programmer roles -->
         <auth-constraint>
-<!--            <role-name>service</role-name>-->
-            <role-name>programmer</role-name>
+<!--            <role-name>service</role-name>
+            <role-name>programmer</role-name>-->
+             <role-name>Administrator</role-name>
         </auth-constraint>
         <!-- Forces a secure connection - remove comments to enable -->
         
@@ -91,14 +100,13 @@
             <form-error-page>/login_error.jsp</form-error-page>
         </form-login-config>
     </login-config>
-<!--    <login-config> 
-	<auth-method>BASIC</auth-method> 
-	<realm-name>Admin Login</realm-name>
-</login-config>-->
+    <!--    <login-config> 
+            <auth-method>BASIC</auth-method> 
+            <realm-name>Admin Login</realm-name>
+    </login-config>-->
 
     <!-- Use cookies (not URL encoding) for session tracking -->
     <session-config>
-<!--        <//tracking-mode>COOKIE<//tracking-mode>-->
-                <session-timeout>30</session-timeout>
+        <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 </web-app>

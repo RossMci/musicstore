@@ -7,7 +7,7 @@ import music.business.*;
 public class UserDB {
 
     public static void insert(User user) {
-        ConnectionPool1 pool = ConnectionPool1.getInstance();
+        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -58,7 +58,7 @@ public class UserDB {
     }
 
     public static void update(User user) {
-        ConnectionPool1 pool = ConnectionPool1.getInstance();
+        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -104,7 +104,7 @@ public class UserDB {
     }
 
     public static User selectUser(String email) {
-        ConnectionPool1 pool = ConnectionPool1.getInstance();
+        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -145,7 +145,7 @@ public class UserDB {
     }
     
     public static boolean emailExists(String email) {
-        ConnectionPool1 pool = ConnectionPool1.getInstance();
+        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;

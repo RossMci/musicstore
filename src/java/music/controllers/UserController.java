@@ -43,14 +43,14 @@ public class UserController extends HttpServlet {
     private String deleteCookies(HttpServletRequest request,
             HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
+//        if (cookies != null) {
             for (Cookie cookie : cookies) {
-                cookie.setPath("/musicStore");
+                cookie.setPath("/musicStore");//musicStore
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
             
-        }
+//        }
          return "/delete_cookies.jsp";
     }
 
