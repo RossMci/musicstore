@@ -1,6 +1,6 @@
 <jsp:include page="/includes/header.jsp" />
 <jsp:include page="/includes/column_left_all.jsp" />
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- start the middle column -->
 
 <section>
@@ -9,7 +9,7 @@
 <p>You did not log in successfully.</p>
 <p>Please check your username and password and try again.</p>
 
-<form action="user/mylogin" method="post">
+<form action="<c:url value='/adminController/mylogin'/>" method="post">
     <label>Username</label>
     <input type="text" name="j_username"><br>
     <label>Password</label>

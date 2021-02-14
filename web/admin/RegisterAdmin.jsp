@@ -13,11 +13,9 @@
     <form action="<c:url value='/adminController/RegisterAdmin'/>" method="post">
         <input type="hidden" name="action" value="add">        
         <label class="pad_top">Username:</label>
-        <input type="text" name="Username"><br>
-        <label class="pad_top">Password:</label>
-        <input type="password" name="Password"><br>
-         <label class="pad_top">Role name</label>
-        <input type="Rolename" name="Rolename"><br>
+        <input type="text" name="Username" required><br>
+        <label class="pad_top" required>Password:</label>
+        <input type="password" name="Password" required><br>
         <label>&nbsp;</label>
         <input type="submit" value="Add Admin" class="margin_left">
     </form>

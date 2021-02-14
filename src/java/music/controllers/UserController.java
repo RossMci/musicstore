@@ -34,46 +34,10 @@ public class UserController extends HttpServlet {
         String url = "";
         if (requestURI.endsWith("/deleteCookies")) {
             url = deleteCookies(request, response);
-        } else if (requestURI.endsWith("/mylogin")) {
-            // System.out.println("Login custom");
-            url = gotoJLogin(request, response);
-            response.sendRedirect(url);
-            return;
         }
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
-    }
-
-    public String gotoJLogin(HttpServletRequest request,
-            HttpServletResponse response)
-            throws IOException, ServletException {
-
-        String username = request.getParameter("j_username");
-        String password = request.getParameter("j_password");
-        
-
-        //  System.out.println(username);
-        //System.out.println(password);
-//        password = HashExample.main(password);
-//        String salt="";
-//        salt=getSalt();
-//        password=hashPassword(password);
-//        System.out.println(password);
-        return "/musicStore/j_security_check?j_username=" + username + "&j_password=" + password + "&submit=Login";
-    }
-
-    
-    private String hashPassword(String password) {
-        return HashExample.main(password);
-//        return password + "n";// adding n;
-    }
-    
-        public static String getSalt() {
-        Random r = new SecureRandom();
-        byte[] saltBytes = new byte[32];
-        r.nextBytes(saltBytes);
-        return Base64.getEncoder().encodeToString(saltBytes);
     }
 
     @Override
@@ -136,38 +100,6 @@ public class UserController extends HttpServlet {
         return url;
     }
     
-    public String saltPassword(String password){
-    MessageDigest md;
-        try
-        {
-            // Select the message digest for the hash computation -> SHA-256
-            md = MessageDigest.getInstance("SHA-256");
-//                SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-            // Generate the random salt
-            SecureRandom random = new SecureRandom(); //SecureRandom();
-            byte[] salt = new byte[32];
-            random.nextBytes(salt);
-
-            // Passing the salt to the digest for the computation
-            md.update(salt);
-
-            // Generate the salted hash
-            byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
-
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedPassword)
-                sb.append(String.format("%02x", b));
-
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
-
-//        return"";
-}
 }
 //https://www.javainterviewpoint.com/java-salted-password-hashing/
 //

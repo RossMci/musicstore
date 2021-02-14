@@ -39,12 +39,17 @@ public class AdminController extends HttpServlet {
         } else if (requestURI.endsWith("/displayReport")) {
             displayReport(request, response);
         } else if (requestURI.endsWith("/RegisterAdmin")) {
+            url = RegisterAdmin(request, response);
+//                    response.sendRedirect(url);
+        } else if (requestURI.endsWith("/mylogin")) {
             try {
-                RegisterAdmin(request, response);
+                url = gotoJLogin(request, response);
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } 
+            response.sendRedirect(url);
+            return;
+        }
 
         getServletContext()
                 .getRequestDispatcher(url)
@@ -62,10 +67,6 @@ public class AdminController extends HttpServlet {
             url = displayInvoice(request, response);
         } else if (requestURI.endsWith("/displayInvoices")) {
             url = displayInvoices(request, response);
-        } else if (requestURI.endsWith("/mylogin")) {
-           url = gotoJLogin(request, response);
-            response.sendRedirect(url);
-            return;
         }
 
         getServletContext()
@@ -147,67 +148,66 @@ public class AdminController extends HttpServlet {
         }
     }
 
-    private void RegisterAdmin(HttpServletRequest request,
-            HttpServletResponse response) throws NoSuchAlgorithmException {
-        String Username = request.getParameter("Username");
-        String Password = request.getParameter("Password");
-        String Rolename = request.getParameter("Rolename");
-        String HashedPassword = PasswordUtil.hashPassword(Password);
-        Admin admin = new Admin();
-        admin.setUsername(Username);
-        admin.setPassword(HashedPassword);
-        admin.setRolename(Rolename);
-        String message;
+    private boolean validUser(Admin admin) {
+        errorMessage = "";
+        boolean validPassword = false;
+        boolean avaibleUsername = false;
         try {
-            PasswordUtil.checkPasswordStrength(Password);
-            message = "";
+            PasswordUtil.checkPasswordStrength(admin.getPassword());
+            validPassword = true;
         } catch (Exception e) {
-            message = e.getMessage();
+            errorMessage = e.getMessage();
         }
 
+        //check that Username  doesn't already exist
+        if (!AdminDB.UsernameExists(admin.getUsername())) {
+            avaibleUsername = true;
+        } else {
+            if (!validPassword) {
+                errorMessage += "<br />";
+            }
+            errorMessage += "<br />" + "This Username:`" + admin.getUsername() + "` is in use." + "<br />";
+        }
+        return validPassword && avaibleUsername;
+    }
+
+    String errorMessage;
+
+    private String RegisterAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String Username = request.getParameter("Username");
+        String Password = request.getParameter("Password");
+       // String Rolename = request.getParameter("Rolename");
+
+        Admin admin = new Admin();
+        admin.setUsername(Username);
+        admin.setPassword(Password);
+        admin.setRolename("Administrator");
+
+        String message = "";
+
+        boolean isValidUser = validUser(admin);
+        if (isValidUser) {
+            try {
+                AdminDB.Register(admin);
+                message = "It worked";
+            } catch (Exception ex) {
+                message += ex.getMessage();
+            }
+        } else {
+            message = errorMessage;
+        }
         request.setAttribute("message", message);
-
-        request.setAttribute("admin", admin);
-
-        String url;
-        //check that email address doesn't already exist
-//        if (UserDB.emailExists(email)) {
-//            message = "This email address already exists. <br>"
-//                    + "Please enter another email address.";
-//            request.setAttribute("message", message);
-//            url = "/email/index.jsp";
-//        } else {
-        AdminDB.Register(admin);
-//            message = "";
-//            request.setAttribute("message", message);
-//            url = "/admin/RegisterAdmin.jsp";
-//        }
-//        return url;
+        return "/admin/RegisterAdmin.jsp";
     }
 
     public String gotoJLogin(HttpServletRequest request,
             HttpServletResponse response)
-            throws IOException, ServletException {
+            throws IOException, ServletException, NoSuchAlgorithmException {
 
         String username = request.getParameter("j_username");
         String password = request.getParameter("j_password");
 
-        System.out.println(username);
-        System.out.println(password);
-        try {
-            String HashPassword = PasswordUtil.hashPassword(password);
-            password = HashPassword;
-//        password = hashPassword(password);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-//        String requestURI = request.getRequestURI();
-        String url = "/musicStore/j_security_check?j_username=" + username + "&j_password=" + password + "&submit=Login";
-
-//        getServletContext()
-//                .getRequestDispatcher(url)
-//                .forward(request, response);
-        return "/musicStore/j_security_check?j_username=" + username + "&j_password=" + password + "&submit=Login";
+        String hashAndSaltPassword = PasswordUtil.hashAndSaltPassword(password);
+        return "/musicStore/j_security_check?j_username=" + username + "&j_password=" + hashAndSaltPassword + "&submit=Login";
     }
 }

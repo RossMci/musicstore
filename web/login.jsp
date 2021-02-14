@@ -10,7 +10,7 @@
 <p>Please enter a username and password to continue.</p>
 
 
-<form action="<c:url value='/adminController/mylogin'/>" method="get"<!--user/mylogin-->
+<form action="<c:url value='/adminController/mylogin'/>" method="post"><!--user/mylogin-->
     <label>Username</label>
     <input type="text" name="j_username"><br>
     <label>Password</label>
