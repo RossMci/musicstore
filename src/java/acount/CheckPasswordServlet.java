@@ -13,8 +13,8 @@ public class CheckPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         // get parameters from the request
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter("j_username");
+        String password = request.getParameter("j_password");
 
         // check strength requirements
         String message;
@@ -44,9 +44,9 @@ public class CheckPasswordServlet extends HttpServlet {
         request.setAttribute("salt", salt);
         request.setAttribute("saltedAndHashedPassword", saltedAndHashedPassword);
         
-        String url = "/index.jsp";
-        getServletContext()
-                .getRequestDispatcher(url)
-                .forward(request, response);
+//        String url = "/index.jsp";
+//        getServletContext()
+//                .getRequestDispatcher(url)
+//                .forward(request, response);
     }    
 }

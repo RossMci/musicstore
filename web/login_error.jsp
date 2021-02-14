@@ -9,7 +9,7 @@
 <p>You did not log in successfully.</p>
 <p>Please check your username and password and try again.</p>
 
-<form action="j_security_check" method="post">
+<form action="user/mylogin" method="post">
     <label>Username</label>
     <input type="text" name="j_username"><br>
     <label>Password</label>

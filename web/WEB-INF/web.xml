@@ -16,10 +16,6 @@
         <servlet-name>CheckPasswordServlet</servlet-name>
         <servlet-class>acount.CheckPasswordServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>CheckPasswordServlet</servlet-name>
-        <url-pattern>/check</url-pattern>
-    </servlet-mapping>
     <servlet>
         <servlet-name>CatalogController</servlet-name>
         <servlet-class>music.controllers.CatalogController</servlet-class>
@@ -43,13 +39,17 @@
     </servlet-mapping>
         <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
-        <url-pattern>/mylogin/*</url-pattern>
+        <url-pattern>/login/*</url-pattern>
     </servlet-mapping>
 
     
     <servlet-mapping>
         <servlet-name>CatalogController</servlet-name>
         <url-pattern>/catalog/product/*</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>CheckPasswordServlet</servlet-name>
+        <url-pattern>/check</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderController</servlet-name>

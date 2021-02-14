@@ -1,5 +1,6 @@
 <jsp:include page="/includes/header.jsp" />
 <jsp:include page="/includes/column_left_all.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- start the middle column -->
 
@@ -9,7 +10,7 @@
 <p>Please enter a username and password to continue.</p>
 
 
-<form action="user/mylogin" method="get">
+<form action="<c:url value='/adminController/mylogin'/>" method="get"<!--user/mylogin-->
     <label>Username</label>
     <input type="text" name="j_username"><br>
     <label>Password</label>

@@ -15,6 +15,9 @@
 <form action="reports.jsp" method="post">
     <input type="submit" value="Display Reports" class="left_margin">
 </form>
+ <form action="RegisterAdmin.jsp" method="post">
+    <input type="submit" value="Add Admin" class="left_margin">
+</form>
 
 </section>
 
